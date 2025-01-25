@@ -1,4 +1,4 @@
-# trimui-brick-screenshot.pak
+# trimui-brick-screenshot-monitor.pak
 
 A TrimUI Brick app allowing for taking screenshots on the device using a hotkey.
 
