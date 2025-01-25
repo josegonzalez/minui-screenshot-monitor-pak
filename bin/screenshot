@@ -1,7 +1,7 @@
 #!/bin/sh
 
 get_screenshot_prefix() {
-    game_name="$(cat /mnt/SDCARD/.userdata/shared/.minui/recent.txt | head -n1 | cut -d$'\t' -f2)"
+    game_name="$(cat "$SDCARD_PATH/.userdata/shared/.minui/recent.txt" | head -n1 | cut -d$'\t' -f2)"
     if [ -z "$game_name" ]; then
         game_name="Screenshot"
     fi
@@ -21,11 +21,11 @@ get_screenshot_prefix() {
 }
 
 main() {
-    mkdir -p /mnt/SDCARD/Screenshots/
+    mkdir -p "$SDCARD_PATH/Screenshots/"
     current_date="$(date +%Y-%m-%d-%H-%M-%S)"
     screenshot_prefix="$(get_screenshot_prefix)"
 
-    /usr/trimui/bin/fbscreencap "/mnt/SDCARD/Screenshots/${screenshot_prefix}.${current_date}.png"
+    /usr/trimui/bin/fbscreencap "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
 }
 
 main "$@"
