@@ -1,0 +1,5 @@
+{
+    "label": "Screenshot Monitor",
+    "launch": "launch.sh",
+    "description": "Launches a daemon that allows users to take screenshots"
+}

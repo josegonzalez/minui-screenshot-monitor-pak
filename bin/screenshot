@@ -1,0 +1,10 @@
+#!/bin/sh
+
+main() {
+    mkdir -p /mnt/SDCARD/Screenshots/
+    game_name="$(cat /mnt/SDCARD/.userdata/shared/.minui/recent.txt | head -n1 | cut -d$'\t' -f2)"
+    current_date="$(date +%Y-%m-%d-%H-%M-%S)"
+    /usr/trimui/bin/fbscreencap "/mnt/SDCARD/Screenshots/${game_name}.${current_date}.png"
+}
+
+main "$@"
