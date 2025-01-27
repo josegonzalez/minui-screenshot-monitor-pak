@@ -6,7 +6,7 @@ get_screenshot_prefix() {
         game_name="Screenshot"
     fi
 
-    screenshot_prefix="false"
+    screenshot_prefix="Screenshot"
     if pgrep "minarch.elf" >/dev/null 2>&1; then
         screenshot_prefix="$game_name"
     elif pgrep "mupen64plus" >/dev/null 2>&1; then
