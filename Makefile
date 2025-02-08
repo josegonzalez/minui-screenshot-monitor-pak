@@ -3,18 +3,10 @@ BUILD_DATE := "$(shell date -u +%FT%TZ)"
 PAK_NAME := $(shell jq -r .label config.json)
 
 clean:
-	rm -f bin/evtest || true
 	rm -f bin/sdl2imgshow || true
 	rm -f res/fonts/BPreplayBold.otf || true
 
-build: bin/evtest bin/sdl2imgshow res/fonts/BPreplayBold.otf
-
-bin/evtest:
-	docker buildx build --platform linux/arm64 --load -f Dockerfile.evtest --progress plain -t app/evtest:$(TAG) .
-	docker container create --name extract app/evtest:$(TAG)
-	docker container cp extract:/go/src/github.com/freedesktop/evtest/evtest bin/evtest
-	docker container rm extract
-	chmod +x bin/evtest
+build: bin/sdl2imgshow res/fonts/BPreplayBold.otf
 
 bin/sdl2imgshow:
 	docker buildx build --platform linux/arm64 --load -f Dockerfile.sdl2imgshow --progress plain -t app/sdl2imgshow:$(TAG) .
