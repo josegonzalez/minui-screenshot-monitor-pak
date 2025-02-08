@@ -198,6 +198,11 @@ main() {
         return 1
     fi
 
+    if [ ! -f "$progdir/bin/minui-btntest-$PLATFORM" ]; then
+        show_message "$progdir/bin/minui-btntest-$PLATFORM not found" 2
+        return 1
+    fi
+
     if [ ! -f "$progdir/bin/minui-keyboard-$PLATFORM" ]; then
         show_message "$progdir/bin/minui-keyboard-$PLATFORM not found" 2
         return 1
