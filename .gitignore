@@ -8,3 +8,5 @@ res/fonts/*
 
 !bin/screenshot
 !bin/screenshot-monitor
+!bin/service-on
+!bin/on-boot
