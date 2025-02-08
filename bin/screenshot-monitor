@@ -1,31 +1,15 @@
 #!/bin/sh
 
-wait_for_button() {
-    button="$1"
-
-    chmod +x "$PROGDIR/bin/evtest"
-    "$PROGDIR/bin/evtest" "/dev/input/event3" 2>&1 | while read -r line; do
-        if echo "$line" | grep -q "code 317 (BTN_THUMBL), *value 1"; then
-            if [ "$button" = "HOTKEY_1" ]; then
-                echo "Taking screenshot..."
-                "$PROGDIR/bin/screenshot" &
-            fi
-        fi
-
-        if echo "$line" | grep -q "code 318 (BTN_THUMBR), *value 1"; then
-            if [ "$button" = "HOTKEY_2" ]; then
-                echo "Taking screenshot..."
-                "$PROGDIR/bin/screenshot" &
-            fi
-        fi
-    done
-}
-
 main() {
     echo "Starting screenshot monitor on $HOTKEY..."
+    chmod +x "$PROGDIR/bin/evtest"
+    chmod +x "$PROGDIR/bin/minui-btntest-$PLATFORM"
+
     while true; do
         echo "Waiting for $HOTKEY..."
-        wait_for_button "$HOTKEY"
+        "$PROGDIR/bin/minui-btntest-$PLATFORM" wait just_released all "$HOTKEY"
+        echo "Taking screenshot..."
+        "$PROGDIR/bin/screenshot" &
     done
 }
 

@@ -15,10 +15,7 @@ main() {
     fi
 
     if [ -z "$hotkey" ]; then
-        hotkey="HOTKEY_1"
-    fi
-    if [ "$hotkey" != "HOTKEY_1" ] && [ "$hotkey" != "HOTKEY_2" ]; then
-        hotkey="HOTKEY_1"
+        hotkey="btn_l3"
     fi
 
     (PROGDIR="$progdir" HOTKEY="$hotkey" "$bindir/screenshot-monitor" >"$LOGS_PATH/$PAK_NAME.service.txt" 2>&1 &) &
