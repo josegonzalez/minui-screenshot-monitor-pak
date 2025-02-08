@@ -40,3 +40,7 @@ The default hotkey is Hotkey 1 (or `L3`), the left hotkey button. To utilize a d
 - `HOTKEY_2` (right hotkey)
 
 If another value is specified, this pak will revert to using `HOTKEY_1`.
+
+### Debug Logging
+
+To enable debug logging, create a file named `debug` in the pak folder. Logs will be written to the `$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
