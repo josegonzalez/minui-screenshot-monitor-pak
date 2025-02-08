@@ -2,7 +2,7 @@
 
 main() {
     echo "Starting screenshot monitor on $HOTKEY..."
-    chmod +x "$PROGDIR/bin/evtest"
+    chmod +x "$PROGDIR/bin/screenshot"
     chmod +x "$PROGDIR/bin/minui-btntest-$PLATFORM"
 
     while true; do
