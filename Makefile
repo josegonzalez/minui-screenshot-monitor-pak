@@ -9,11 +9,10 @@ MINUI_BTNTEST_VERSION := 0.2.0
 clean:
 	rm -f bin/minui-btntest-* || true
 	rm -f bin/minui-list-* || true
-	rm -f bin/screenshot-monitor || true
 	rm -f bin/sdl2imgshow || true
 	rm -f res/fonts/BPreplayBold.otf || true
 
-build: $(foreach platform,$(PLATFORMS),bin/minui-list-$(platform) bin/minui-btntest-$(platform)) bin/screenshot-monitor bin/sdl2imgshow res/fonts/BPreplayBold.otf
+build: $(foreach platform,$(PLATFORMS),bin/minui-list-$(platform) bin/minui-btntest-$(platform)) bin/sdl2imgshow res/fonts/BPreplayBold.otf
 
 bin/minui-btntest-%:
 	curl -f -o bin/minui-btntest-$* -sSL https://github.com/josegonzalez/minui-btntest/releases/download/$(MINUI_BTNTEST_VERSION)/minui-btntest-$*
