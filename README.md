@@ -34,7 +34,7 @@ Press the hotkey when in game. A png screenshot will appear on the SDCard, in `/
 > [!IMPORTANT]
 > If one of the hotkeys in use is mapped to something else within MinUI, the pak may not trigger.
 
-The default hotkey is `L3` - see the Input app to determine what this maps to on your device. To utilize a different hotkey, create a file named `hotkey` in the pak folder with the name of the key you want to monitor. Any of the buttons supported by [`minui-btntest`](https://github.com/josegonzalez/minui-btntest) are supported. You can also specify multiple by using a comma-separated list.
+The default hotkey is `L2` - see the Input app to determine what this maps to on your device. To utilize a different hotkey, create a file named `hotkey` in the pak folder with the name of the key you want to monitor. Any of the buttons supported by [`minui-btntest`](https://github.com/josegonzalez/minui-btntest) are supported. You can also specify multiple by using a comma-separated list.
 
 ### Debug Logging
 
