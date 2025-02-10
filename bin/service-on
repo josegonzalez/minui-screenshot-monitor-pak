@@ -9,13 +9,13 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$progdir/lib"
 main() {
     cd "$SDCARD_PATH" || return 1
 
-    hotkey="HOTKEY_1"
+    hotkey=""
     if [ -f "$progdir/hotkey" ]; then
         hotkey="$(cat "$progdir/hotkey")"
     fi
 
     if [ -z "$hotkey" ]; then
-        hotkey="btn_l3"
+        hotkey="btn_l2"
     fi
 
     (PLATFORM="$PLATFORM" PROGDIR="$progdir" HOTKEY="$hotkey" "$bindir/screenshot-monitor" >"$LOGS_PATH/$PAK_NAME.service.txt" 2>&1 &) &
