@@ -89,6 +89,14 @@ is_service_running() {
     return 1
 }
 
+get_service_pid() {
+    if [ "$LAUNCHES_SCRIPT" = "true" ]; then
+        pgrep -fn "$SERVICE_NAME" 2>/dev/null | sort | head -n 1 || true
+    else
+        pgrep "$SERVICE_NAME" 2>/dev/null | sort | head -n 1 || true
+    fi
+}
+
 wait_for_service() {
     max_counter="$1"
     counter=0
@@ -164,7 +172,7 @@ main_screen() {
     echo "Enable" >>"$minui_list_file"
 
     if is_service_running; then
-        service_pid="$(pgrep "$SERVICE_NAME" 2>/dev/null | sort | head -n 1 || true)"
+        service_pid="$(get_service_pid)"
         ip_address="$(get_ip_address)"
         echo "Enabled: true (pid: $service_pid)" >"$minui_list_file"
         echo "Start on boot: $start_on_boot" >>"$minui_list_file"
