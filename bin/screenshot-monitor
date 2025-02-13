@@ -7,7 +7,7 @@ main() {
 
     while true; do
         echo "Waiting for $HOTKEY..."
-        "$PROGDIR/bin/minui-btntest-$PLATFORM" wait just_released all "$HOTKEY"
+        "$PROGDIR/bin/minui-btntest-$PLATFORM" wait is_pressed all "$HOTKEY"
         echo "Taking screenshot..."
         "$PROGDIR/bin/screenshot" &
     done
