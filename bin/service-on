@@ -27,7 +27,7 @@ main() {
         hotkey="btn_l2"
     fi
 
-    PLATFORM="$PLATFORM" PROGDIR="$PAK_DIR" HOTKEY="$hotkey" screenshot-monitor &
+    PLATFORM="$PLATFORM" HOTKEY="$hotkey" screenshot-monitor &
 }
 
 main "$@"
