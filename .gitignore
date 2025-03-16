@@ -5,6 +5,7 @@ res/fonts/*
 !res/fonts/.gitkeep
 
 !bin/screenshot
-!bin/screenshot-monitor
+!bin/arm/screenshot-monitor
+!bin/arm64/screenshot-monitor
 !bin/service-on
 !bin/on-boot

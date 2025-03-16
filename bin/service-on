@@ -1,24 +1,33 @@
 #!/bin/sh
-bindir="$(dirname "$0")"
-progdir="$(dirname "$bindir")"
-cd "$progdir" || exit 1
-[ -f "$USERDATA_PATH/ScreenshotMonitor/debug" ] && set -x
-PAK_NAME="$(basename "$progdir")"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$progdir/lib"
+BIN_DIR="$(dirname "$0")"
+PAK_DIR="$(dirname "$BIN_DIR")"
+PAK_NAME="$(basename "$PAK_DIR")"
+PAK_NAME="${PAK_NAME%.*}"
+[ -f "$USERDATA_PATH/$PAK_NAME/debug" ] && set -x
+
+echo "$0" "$@"
+cd "$PAK_DIR" || exit 1
+
+architecture=arm
+if uname -m | grep -q '64'; then
+    architecture=arm64
+fi
+
+export PATH="$PAK_DIR/bin/$architecture:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin:$PATH"
 
 main() {
     cd "$SDCARD_PATH" || return 1
 
     hotkey=""
-    if [ -f "$progdir/hotkey" ]; then
-        hotkey="$(cat "$progdir/hotkey")"
+    if [ -f "$USERDATA_PATH/$PAK_NAME/hotkey" ]; then
+        hotkey="$(cat "$USERDATA_PATH/$PAK_NAME/hotkey")"
     fi
 
     if [ -z "$hotkey" ]; then
         hotkey="btn_l2"
     fi
 
-    (PLATFORM="$PLATFORM" PROGDIR="$progdir" HOTKEY="$hotkey" "$bindir/screenshot-monitor" >"$LOGS_PATH/$PAK_NAME.service.txt" 2>&1 &) &
+    PLATFORM="$PLATFORM" PROGDIR="$PAK_DIR" HOTKEY="$hotkey" screenshot-monitor &
 }
 
 main "$@"
