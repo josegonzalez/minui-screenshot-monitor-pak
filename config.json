@@ -1,5 +1,21 @@
 {
     "label": "Screenshot Monitor",
     "launch": "launch.sh",
-    "description": "Launches a daemon that allows users to take screenshots"
+    "description": "Launches a daemon that allows users to take screenshots",
+    "platforms": [
+        "rg35xxplus",
+        "tg5040"
+    ],
+    "settings": [
+        {
+            "name": "Enable",
+            "options": ["false", "true"],
+            "selected": 0
+        },
+        {
+            "name": "Start on boot",
+            "options": ["false", "true"],
+            "selected": 0
+        }
+    ]
 }
