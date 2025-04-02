@@ -38,4 +38,4 @@ The default hotkey is `L2` - see the Input app to determine what this maps to on
 
 ### Debug Logging
 
-To enable debug logging, create a file named `debug` in the `$SDCARD_PATH/.userdata/$PLATFORM/Screenshot Monitor` folder. Logs will be written to the `$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
+Debug logs are written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
