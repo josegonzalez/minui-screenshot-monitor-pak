@@ -2,6 +2,7 @@
     "label": "Screenshot Monitor",
     "launch": "launch.sh",
     "description": "Launches a daemon that allows users to take screenshots",
+    "pak_type": "tool",
     "platforms": [
         "rg35xxplus",
         "tg5040"

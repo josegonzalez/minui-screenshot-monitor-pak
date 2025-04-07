@@ -25,7 +25,14 @@ main() {
     current_date="$(date +%Y-%m-%d-%H-%M-%S)"
     screenshot_prefix="$(get_screenshot_prefix)"
 
-    /usr/trimui/bin/fbscreencap "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
+    if command -v pngwrite >/dev/null 2>&1; then
+        pngwrite "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
+    elif command -v screencap >/dev/null 2>&1; then
+        /usr/trimui/bin/fbscreencap "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
+    else
+        echo "No screenshot tool found"
+        return 1
+    fi
 }
 
 main "$@"
