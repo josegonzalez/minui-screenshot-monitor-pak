@@ -7,5 +7,7 @@ res/fonts/*
 !bin/screenshot
 !bin/arm/screenshot-monitor
 !bin/arm64/screenshot-monitor
-!bin/service-on
 !bin/on-boot
+!bin/service-is-running
+!bin/service-off
+!bin/service-on
