@@ -1,14 +1,14 @@
 {
-    "name": "Screenshot Monitor",
-    "type": "TOOL",
-    "description": "Launches a daemon that allows users to take screenshots",
-    "author": "josegonzalez",
-    "repo_url": "https://github.com/josegonzalez/minui-screenshot-monitor-pak",
-    "release_filename": "Screenshot.Monitor.pak.zip",
-    "platforms": [
-        "rg35xxplus",
-        "tg5040"
-    ],
-    "launch": "launch.sh",
-    "version": "latest"
+  "name": "Screenshot Monitor",
+  "type": "TOOL",
+  "description": "Launches a daemon that allows users to take screenshots",
+  "author": "josegonzalez",
+  "repo_url": "https://github.com/josegonzalez/minui-screenshot-monitor-pak",
+  "release_filename": "Screenshot.Monitor.pak.zip",
+  "platforms": [
+    "rg35xxplus",
+    "tg5040"
+  ],
+  "launch": "launch.sh",
+  "version": "0.6.2"
 }
