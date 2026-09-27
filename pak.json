@@ -6,6 +6,7 @@
   "repo_url": "https://github.com/josegonzalez/minui-screenshot-monitor-pak",
   "release_filename": "Screenshot.Monitor.pak.zip",
   "platforms": [
+    "h700",
     "miyoomini",
     "my282",
     "my355",

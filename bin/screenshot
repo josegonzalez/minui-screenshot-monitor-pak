@@ -27,7 +27,7 @@ main() {
 
     if command -v pngwrite >/dev/null 2>&1; then
         pngwrite "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
-    elif command -v screencap >/dev/null 2>&1; then
+    elif [ -x /usr/trimui/bin/fbscreencap ]; then
         /usr/trimui/bin/fbscreencap "$SDCARD_PATH/Screenshots/${screenshot_prefix}.${current_date}.png"
     else
         echo "No screenshot tool found"

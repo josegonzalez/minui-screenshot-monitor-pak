@@ -2,6 +2,11 @@ bin/arm/jq
 bin/arm/jq.LICENSE
 bin/arm64/jq
 bin/arm64/jq.LICENSE
+bin/h700/minui-btntest
+bin/h700/minui-list
+bin/h700/minui-presenter
+bin/h700/pngwrite
+bin/h700/pngwrite.LICENSE
 bin/miyoomini/minui-btntest
 bin/miyoomini/minui-list
 bin/miyoomini/minui-presenter
