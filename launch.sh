@@ -21,6 +21,10 @@ export HOME="$USERDATA_PATH/$PAK_NAME"
 export LD_LIBRARY_PATH="$PAK_DIR/lib:$LD_LIBRARY_PATH"
 export PATH="$PAK_DIR/bin/$architecture:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin:$PATH"
 
+if [ "$DEVICE" = "rgsp" ]; then
+    export RGXX_MODEL="RG34xx"
+fi
+
 SERVICE_NAME="screenshot-monitor"
 HUMAN_READABLE_NAME="Screenshot Monitor"
 LAUNCHES_SCRIPT="true"
@@ -200,7 +204,7 @@ main() {
         export PLATFORM="tg5040"
     fi
 
-    allowed_platforms="miyoomini my282 my355 rg35xxplus tg5040 tg5050"
+    allowed_platforms="h700 miyoomini my282 my355 rg35xxplus tg5040 tg5050"
     if ! echo "$allowed_platforms" | grep -q "$PLATFORM"; then
         show_message "$PLATFORM is not a supported platform" 2
         return 1
@@ -222,14 +226,6 @@ main() {
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-presenter"
     chmod +x "$PAK_DIR/bin/service-on"
     chmod +x "$PAK_DIR/bin/on-boot"
-
-    if [ "$PLATFORM" = "rg35xxplus" ]; then
-        RGXX_MODEL="$(strings /mnt/vendor/bin/dmenu.bin | grep ^RG)"
-        if [ "$RGXX_MODEL" = "RG28xx" ]; then
-            show_message "Wifi not supported on RG28XX" 2
-            return 1
-        fi
-    fi
 
     while true; do
         settings="$(current_settings)"
