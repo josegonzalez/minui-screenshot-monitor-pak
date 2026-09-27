@@ -224,6 +224,7 @@ main() {
     chmod +x "$PAK_DIR/bin/$architecture/jq"
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-list"
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-presenter"
+    chmod +x "$PAK_DIR/bin/normalize-hotkey"
     chmod +x "$PAK_DIR/bin/service-on"
     chmod +x "$PAK_DIR/bin/on-boot"
 
@@ -248,7 +249,13 @@ main() {
         if [ "$old_enabled" != "$enabled" ]; then
             if [ "$enabled" = "1" ]; then
                 show_message "Enabling $HUMAN_READABLE_NAME" 2
-                if ! service-on; then
+                service-on
+                service_exit_code=$?
+                # exit code 2 = invalid hotkey
+                if [ "$service_exit_code" -eq 2 ]; then
+                    show_message "Invalid hotkey, see README" 2
+                    continue
+                elif [ "$service_exit_code" -ne 0 ]; then
                     show_message "Failed to enable $HUMAN_READABLE_NAME!" 2
                     continue
                 fi

@@ -18,9 +18,15 @@ export PATH="$PAK_DIR/bin/$architecture:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin:$PAT
 main() {
     cd "$SDCARD_PATH" || return 1
 
-    hotkey=""
+    raw_hotkey=""
     if [ -f "$USERDATA_PATH/$PAK_NAME/hotkey" ]; then
-        hotkey="$(cat "$USERDATA_PATH/$PAK_NAME/hotkey")"
+        raw_hotkey="$(cat "$USERDATA_PATH/$PAK_NAME/hotkey")"
+    fi
+
+    # exit 2 lets launch.sh tell an invalid hotkey apart from other failures
+    if ! hotkey="$(normalize-hotkey "$raw_hotkey")"; then
+        echo "Invalid hotkey: $raw_hotkey"
+        return 2
     fi
 
     if [ -z "$hotkey" ]; then
