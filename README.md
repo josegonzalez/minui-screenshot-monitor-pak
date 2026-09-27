@@ -39,8 +39,16 @@ Press the hotkey when in game. A png screenshot will appear on the SDCard, in `/
 > [!IMPORTANT]
 > If one of the hotkeys in use is mapped to something else within MinUI, the pak may not trigger.
 
-The default hotkey is `L2` - see the Input app to determine what this maps to on your device. To utilize a different hotkey, create a file named `hotkey` in the `$SDCARD_PATH/.userdata/$PLATFORM/Screenshot Monitor` folder with the name of the key you want to monitor. Any of the buttons supported by [`minui-btntest`](https://github.com/josegonzalez/minui-btntest) are supported. You can also specify multiple by using a comma-separated list.
+The default hotkey is `btn_l2` - see the Input app to determine what this maps to on your device. To utilize a different hotkey, create a file named `hotkey` in the `$SDCARD_PATH/.userdata/$PLATFORM/Screenshot Monitor` folder with the name of the key you want to monitor. Any of the [buttons supported by `minui-btntest`](https://github.com/josegonzalez/minui-btntest#buttons) are supported, except `btn_none`. Names are case-insensitive and the `btn_` prefix is optional, so `L2`, `l2`, and `btn_l2` are all equivalent. You can also specify multiple by using a comma-separated list (e.g. `btn_l1,btn_r1`), in which case all of the buttons must be held at the same time.
+
+Holding the hotkey takes a single screenshot. Release and press it again to take another.
+
+If the hotkey file contains an invalid button, the screenshot monitor will not start and an `Invalid hotkey` message is shown.
 
 ### Debug Logging
 
 Debug logs are written to the`$SDCARD_PATH/.userdata/$PLATFORM/logs/` folder.
+
+## Development
+
+Run `make test` to run the test suite. The tests require [`bats`](https://github.com/bats-core/bats-core).

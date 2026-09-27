@@ -17,16 +17,33 @@ fi
 export PATH="$PAK_DIR/bin/$architecture:$PAK_DIR/bin/$PLATFORM:$PAK_DIR/bin:$PATH"
 
 main() {
+    # minui-btntest treats `all` with no buttons as always pressed
+    if [ -z "$HOTKEY" ]; then
+        echo "No hotkey configured"
+        return 1
+    fi
+
     echo "Starting screenshot monitor on $HOTKEY..."
     chmod +x "$PAK_DIR/bin/screenshot"
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-btntest"
 
-    while true; do
-        echo "Waiting for $HOTKEY..."
-        minui-btntest wait is_pressed all "$HOTKEY"
-        echo "Taking screenshot..."
-        screenshot &
-    done
+    # service-off kills this script, so stop the watcher along with it
+    btntest_pid=""
+    trap 'kill -TERM "$btntest_pid" 2>/dev/null; wait "$btntest_pid"; exit 0' TERM INT HUP
+
+    minui-btntest watch is_pressed all "$HOTKEY" -- screenshot &
+    btntest_pid=$!
+    wait "$btntest_pid"
+    exit_code=$?
+
+    # exit code 10 is a minui-btntest parse error
+    if [ "$exit_code" -eq 10 ]; then
+        echo "Invalid hotkey: $HOTKEY"
+    else
+        echo "minui-btntest exited unexpectedly ($exit_code)"
+    fi
+
+    return "$exit_code"
 }
 
 main "$@"

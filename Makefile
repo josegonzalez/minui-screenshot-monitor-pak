@@ -10,7 +10,7 @@ PLATFORMS := h700 miyoomini my282 my355 rg35xxplus tg5040 tg5050
 
 JQ_VERSION ?= 1.7.1
 MINUI_LIST_VERSION := 0.15.4
-MINUI_BTNTEST_VERSION := 0.8.0
+MINUI_BTNTEST_VERSION := 0.9.0
 MINUI_PRESENTER_VERSION := 0.13.4
 
 clean:
@@ -83,6 +83,9 @@ release: build
 	$(MAKE) bump-version
 	zip -r "dist/$(PAK_NAME).pak.zip" pak.json
 	ls -lah dist
+
+test:
+	bats tests/
 
 bump-version:
 	jq '.version = "$(RELEASE_VERSION)"' pak.json > pak.json.tmp

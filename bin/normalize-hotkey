@@ -1,0 +1,52 @@
+#!/bin/sh
+# normalize-hotkey <hotkey>
+#
+# Prints the normalized, comma-separated hotkey for minui-btntest.
+# Entries are trimmed, lowercased and prefixed with `btn_` when missing,
+# so `L2`, `l2` and `BTN_L2` all become `btn_l2`. Exits 1 on any
+# entry minui-btntest would reject.
+
+# mirrors valid_buttons in minui-btntest's args.c, minus btn_none
+# (which maps to no button, so the hotkey could never fire)
+valid_buttons="btn_a btn_analog_down btn_analog_left btn_analog_right btn_analog_up btn_b btn_down btn_dpad_down btn_dpad_left btn_dpad_right btn_dpad_up btn_l1 btn_l2 btn_l3 btn_left btn_menu btn_minus btn_plus btn_power btn_poweroff btn_r1 btn_r2 btn_r3 btn_right btn_select btn_start btn_up btn_x btn_y"
+
+is_valid_button() {
+    for valid_button in $valid_buttons; do
+        if [ "$1" = "$valid_button" ]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+main() {
+    raw="$(printf '%s' "$1" | tr -d ' \t\r\n' | tr '[:upper:]' '[:lower:]')"
+
+    normalized=""
+    old_ifs="$IFS"
+    IFS=","
+    for button in $raw; do
+        IFS="$old_ifs"
+        if [ -z "$button" ]; then
+            continue
+        fi
+
+        case "$button" in
+        btn_*) ;;
+        *) button="btn_$button" ;;
+        esac
+
+        if ! is_valid_button "$button"; then
+            echo "invalid button: $button" >&2
+            return 1
+        fi
+
+        normalized="${normalized:+$normalized,}$button"
+    done
+    IFS="$old_ifs"
+
+    printf '%s\n' "$normalized"
+}
+
+main "$@"
