@@ -1,0 +1,21 @@
+#!/bin/sh
+# sanitize-filename <name>
+#
+# Prints a version of the name that can be stored on a FAT32/exFAT SD card.
+# Control characters are removed, colons become ` - ` (so
+# `Mars Matrix: Hyper Solid Shooting` becomes
+# `Mars Matrix - Hyper Solid Shooting`) and any other character the
+# filesystem rejects becomes `_`. Leading dots and spaces are stripped so the
+# file is not hidden. Prints nothing when no usable characters remain.
+
+main() {
+    sanitized="$(printf '%s' "$1" |
+        tr -d '\000-\037\177' |
+        sed -e 's/[[:space:]]*:[[:space:]]*/ - /g' |
+        tr '\\/*?"<>|' '________' |
+        sed -e 's/  */ /g' -e 's/^[ .]*//' -e 's/ *$//')"
+
+    printf '%s\n' "$sanitized"
+}
+
+main "$@"

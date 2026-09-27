@@ -22,7 +22,7 @@ setup() {
     mkdir -p "$PAK_DIR/bin/arm" "$PAK_DIR/bin/arm64" "$PAK_DIR/bin/$PLATFORM"
     cp "$REPO_ROOT/bin/arm/screenshot-monitor" "$PAK_DIR/bin/arm/"
     cp "$REPO_ROOT/bin/arm64/screenshot-monitor" "$PAK_DIR/bin/arm64/"
-    touch "$PAK_DIR/bin/screenshot"
+    touch "$PAK_DIR/bin/screenshot" "$PAK_DIR/bin/sanitize-filename"
 
     # the stub records every call, then either exits with $STUB_EXIT
     # or blocks until it is sent SIGTERM when $STUB_EXIT is "block".

@@ -9,6 +9,7 @@ res/fonts/*
 !bin/arm64/screenshot-monitor
 !bin/normalize-hotkey
 !bin/on-boot
+!bin/sanitize-filename
 !bin/service-is-running
 !bin/service-off
 !bin/service-on
