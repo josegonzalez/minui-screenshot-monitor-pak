@@ -1,7 +1,18 @@
 #!/bin/sh
 
 get_screenshot_prefix() {
-    game_name="$(cat "$SDCARD_PATH/.userdata/shared/.minui/recent.txt" | head -n1 | cut -d$'\t' -f2)"
+    recent_entry="$(head -n1 "$SDCARD_PATH/.userdata/shared/.minui/recent.txt" 2>/dev/null)"
+
+    # entries are `<rom path>` or `<rom path><tab><name>`
+    game_name="$(printf '%s\n' "$recent_entry" | cut -s -f2)"
+    if [ -z "$game_name" ]; then
+        rom_path="$(printf '%s\n' "$recent_entry" | cut -f1)"
+        game_name="$(basename "$rom_path")"
+        game_name="${game_name%.*}"
+    fi
+
+    # the sd card cannot store characters like `:` in filenames
+    game_name="$(sanitize-filename "$game_name")"
     if [ -z "$game_name" ]; then
         game_name="Screenshot"
     fi

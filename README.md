@@ -32,7 +32,7 @@ Use the correct platform for your device.
 
 Browse to `Tools > Screenshot Monitor` and press `A` to turn on the screenshot monitor.
 
-Press the hotkey when in game. A png screenshot will appear on the SDCard, in `/mnt/SDCARD/Screenshots`, with the name of the game and the current date as the filename.
+Press the hotkey when in game. A png screenshot will appear on the SDCard, in `/mnt/SDCARD/Screenshots`, with the name of the game and the current date as the filename. Characters that cannot be stored on the SD card are replaced in the filename: `:` becomes ` - ` and `\ / * ? " < > |` become `_`.
 
 ### hotkey
 

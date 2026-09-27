@@ -25,6 +25,7 @@ main() {
 
     echo "Starting screenshot monitor on $HOTKEY..."
     chmod +x "$PAK_DIR/bin/screenshot"
+    chmod +x "$PAK_DIR/bin/sanitize-filename"
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-btntest"
 
     # service-off kills this script, so stop the watcher along with it

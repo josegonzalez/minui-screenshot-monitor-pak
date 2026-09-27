@@ -225,6 +225,7 @@ main() {
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-list"
     chmod +x "$PAK_DIR/bin/$PLATFORM/minui-presenter"
     chmod +x "$PAK_DIR/bin/normalize-hotkey"
+    chmod +x "$PAK_DIR/bin/sanitize-filename"
     chmod +x "$PAK_DIR/bin/service-on"
     chmod +x "$PAK_DIR/bin/on-boot"
 
